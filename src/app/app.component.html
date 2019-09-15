@@ -1,0 +1,33 @@
+{{list$ | async |json }}
+<div class="row">
+  <div class="col-12">
+    <input type="text" class="form-control" [(ngModel)]="searchText">
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Department</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of list$ | async | filter:searchText | sortbyname
+ ">
+      <td>{{row.id}}</td>
+      <td>{{row.name}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.department}}</td>
+      <td>
+        <div class="btn-group">
+          <a class="btn btn-info" routerLink="/show/{{row.id}}">Show</a>
+          <a class="btn btn-danger" (click)="onDelete(row.id)">Delete</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
